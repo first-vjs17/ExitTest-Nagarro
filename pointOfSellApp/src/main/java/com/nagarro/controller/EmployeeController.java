@@ -1,6 +1,10 @@
 package com.nagarro.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,14 +19,18 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
 	
-//	@RequestMapping(value="/employee", method = RequestMethod.GET)
-//	public String demo() {
-//		return "Hello";
-//	}
+	/*---get all employees---*/
+	@RequestMapping(value="/employees", method = RequestMethod.GET)
+	public List<Employee> demo() {
+		List<Employee> employees = employeeService.getAllEmployees();
+		for (Employee employee : employees) {
+			System.out.println(employee.getEmployeeName());
+		}
+		return employees;
+	}
 	
 	@RequestMapping(value="/addemp")
 	public void addEmployee() {
-//		System.out.println(employee.getEmployeeId()+" "+employee.getEmployeeName());
 		System.out.println("In controller..");
 		Employee emp = new Employee();
 		emp.setEmployeeId(101);

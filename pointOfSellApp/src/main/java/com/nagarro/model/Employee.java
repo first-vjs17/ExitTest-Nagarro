@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -20,10 +21,10 @@ public class Employee {
 	private String employeeMobileNo;
 	private String password;
 	
-	@OneToMany(mappedBy = "employee")
+	@OneToMany(mappedBy = "employee", fetch=FetchType.EAGER)
 	private Set<EmployeeCashDrawer> employeeCashDrawerDetails = new HashSet<>();
 	
-	@OneToMany(mappedBy = "employee")
+	@OneToMany(mappedBy = "employee", fetch=FetchType.EAGER)
 	private Set<OrderDetails> orderDetails = new HashSet<>();
 	/**
 	 * @return the employeeCashDrawerDetails
