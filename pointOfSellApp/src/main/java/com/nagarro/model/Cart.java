@@ -26,7 +26,7 @@ public class Cart {
 	@GeneratedValue
 	private long cartId;
 	
-	@OneToMany( mappedBy = "cart" )
+	@OneToMany(mappedBy="cart")
 	private Set<Cart_Product> cartProduct = new HashSet<>();
 	
 	@ManyToOne( cascade = CascadeType.ALL )

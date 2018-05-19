@@ -4,11 +4,10 @@
 package com.nagarro.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 /**
  * @author vijaysharma01
@@ -16,51 +15,32 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Order_Product {
+
+	@EmbeddedId
+	private OrderProductCompositeKey id;
+
+	private int quantity;
+
+	@MapsId("orderKey")
+	@ManyToOne(cascade = CascadeType.ALL)
+	private OrderDetails orderDetails;
+
+	@MapsId("productKey")
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Product product;
 	
-	@Id
-	@GeneratedValue
-	private long id;
-
 	/**
-	 * @return the id
+	 * @return the orderDetails
 	 */
-	public long getId() {
-		return id;
+	public OrderDetails getOrderDetails() {
+		return orderDetails;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param orderDetails the orderDetails to set
 	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the quantity
-	 */
-	public int getQuantity() {
-		return quantity;
-	}
-
-	/**
-	 * @param quantity the quantity to set
-	 */
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	/**
-	 * @return the order
-	 */
-	public Order getOrder() {
-		return order;
-	}
-
-	/**
-	 * @param order the order to set
-	 */
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrderDetails(OrderDetails orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 
 	/**
@@ -77,13 +57,18 @@ public class Order_Product {
 		this.product = product;
 	}
 
-	private int quantity;
+	/**
+	 * @return the quantity
+	 */
+	public int getQuantity() {
+		return quantity;
+	}
+
+	/**
+	 * @param quantity the quantity to set
+	 */
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="order_id", nullable=false)
-	private Order order;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="product_id", nullable=false)
-	private Product product;
 }

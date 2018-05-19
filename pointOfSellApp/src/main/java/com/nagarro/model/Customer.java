@@ -18,24 +18,25 @@ public class Customer {
 	private String customerMail;
 	private String customerMobile;
 	
-	@OneToMany
-	private Set<Order> order = new HashSet<>();
+	@OneToMany(mappedBy="customer")
+	private Set<OrderDetails> orderDetails = new HashSet<>();
 	
-	@OneToMany
+	@OneToMany(mappedBy="customer")
 	private Set<Cart> cart = new HashSet<>();
-	
+
+
 	/**
-	 * @return the order
+	 * @return the orderDetails
 	 */
-	public Set<Order> getOrder() {
-		return order;
+	public Set<OrderDetails> getOrderDetails() {
+		return orderDetails;
 	}
 
 	/**
-	 * @param order the order to set
+	 * @param orderDetails the orderDetails to set
 	 */
-	public void setOrder(Set<Order> order) {
-		this.order = order;
+	public void setOrderDetails(Set<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 
 	/**

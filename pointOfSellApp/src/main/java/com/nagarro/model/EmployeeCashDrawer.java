@@ -35,7 +35,7 @@ public class EmployeeCashDrawer {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="emp_id", nullable=false)
-	private Employer employee;
+	private Employee employee;
 	
 	public EmployeeCashDrawer() {
 		
@@ -114,14 +114,14 @@ public class EmployeeCashDrawer {
 	/**
 	 * @return the employee
 	 */
-	public Employer getEmployee() {
+	public Employee getEmployee() {
 		return employee;
 	}
 
 	/**
 	 * @param employee the employee to set
 	 */
-	public void setEmployee(Employer employee) {
+	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
 }
