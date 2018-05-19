@@ -1,23 +1,20 @@
 package com.nagarro.repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.nagarro.model.Employee;
+import com.nagarro.utils.HibernateUtil;
 
 @Repository("employeeRepo")
 public class EmployeeRepositoryImpl implements EmployeeRepository{
 
-	@PersistenceContext
-	private EntityManager em;
+	@Autowired
+    private HibernateUtil hibernateUtil;
 	
 	@Override
-	public void addEmployee(Employee employee) {
-		System.out.println("In Repo..");
-		em.persist(employee);
-		em.flush();
+	public long createEmployee(Employee employee) {
+		return (Long) hibernateUtil.create(employee);
 	}
 
 }

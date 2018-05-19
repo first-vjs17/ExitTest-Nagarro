@@ -30,6 +30,7 @@ public class EmployeeController {
 		emp.setEmployeeMobileNo("12345678");
 		emp.setEmployeeName("vijay");
 		emp.setPassword("1234");
-		employeeService.addEmployee(emp);
+		System.out.println(employeeService.createEmployee(emp));
+		
 	}
 }

@@ -11,5 +11,6 @@ import com.nagarro.model.Employee;
  */
 public interface EmployeeRepository {
 
-	public void addEmployee(Employee employee);
+	public long createEmployee(Employee employee);
+
 }
