@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,7 +38,7 @@ public class OrderDetails {
 	@JoinColumn(name="cust_id", nullable=false)
 	private Customer customer;
 	
-	@OneToMany(mappedBy="orderDetails")
+	@OneToMany(mappedBy="orderDetails",fetch=FetchType.EAGER)
 	private Set<Order_Product> orderProduct = new HashSet<>();
 	
 	

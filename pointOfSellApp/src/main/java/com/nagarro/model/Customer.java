@@ -4,9 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Customer {
@@ -18,12 +20,26 @@ public class Customer {
 	private String customerMail;
 	private String customerMobile;
 	
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy="customer", fetch=FetchType.EAGER)
 	private Set<OrderDetails> orderDetails = new HashSet<>();
 	
-	@OneToMany(mappedBy="customer")
-	private Set<Cart> cart = new HashSet<>();
+	@OneToOne(mappedBy="customer", fetch=FetchType.EAGER)
+	private Cart cart = new Cart();
 
+
+	/**
+	 * @return the cart
+	 */
+	public Cart getCart() {
+		return cart;
+	}
+
+	/**
+	 * @param cart the cart to set
+	 */
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 
 	/**
 	 * @return the orderDetails
@@ -37,20 +53,6 @@ public class Customer {
 	 */
 	public void setOrderDetails(Set<OrderDetails> orderDetails) {
 		this.orderDetails = orderDetails;
-	}
-
-	/**
-	 * @return the cart
-	 */
-	public Set<Cart> getCart() {
-		return cart;
-	}
-
-	/**
-	 * @param cart the cart to set
-	 */
-	public void setCart(Set<Cart> cart) {
-		this.cart = cart;
 	}
 
 	public Customer() {

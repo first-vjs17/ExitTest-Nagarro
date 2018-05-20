@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -11,31 +12,21 @@ import javax.persistence.OneToMany;
 @Entity
 public class Product {
 
+	@OneToMany(mappedBy="product",fetch=FetchType.EAGER)
+	private Set<Cart_Product> cartProduct = new HashSet<>();
+	@OneToMany(mappedBy="product",fetch=FetchType.EAGER)
+	private Set<Order_Product> orderProduct = new HashSet<>();
+	private String prductName;
 	@Id
 	@GeneratedValue
 	private long productId;
-	private String prductName;
+	
 	private long stock;
+	
 	private double unitPrice;
 	
-	@OneToMany(mappedBy="product")
-	private Set<Order_Product> orderProduct = new HashSet<>();
-	
-	@OneToMany(mappedBy="product")
-	private Set<Cart_Product> cartProduct = new HashSet<>();
-	
-	/**
-	 * @return the orderProduct
-	 */
-	public Set<Order_Product> getOrderProduct() {
-		return orderProduct;
-	}
-
-	/**
-	 * @param orderProduct the orderProduct to set
-	 */
-	public void setOrderProduct(Set<Order_Product> orderProduct) {
-		this.orderProduct = orderProduct;
+	public Product() {
+		
 	}
 
 	/**
@@ -46,28 +37,10 @@ public class Product {
 	}
 
 	/**
-	 * @param cartProduct the cartProduct to set
+	 * @return the orderProduct
 	 */
-	public void setCartProduct(Set<Cart_Product> cartProduct) {
-		this.cartProduct = cartProduct;
-	}
-
-	public Product() {
-		
-	}
-
-	/**
-	 * @return the productId
-	 */
-	public long getProductId() {
-		return productId;
-	}
-
-	/**
-	 * @param productId the productId to set
-	 */
-	public void setProductId(long productId) {
-		this.productId = productId;
+	public Set<Order_Product> getOrderProduct() {
+		return orderProduct;
 	}
 
 	/**
@@ -78,10 +51,10 @@ public class Product {
 	}
 
 	/**
-	 * @param prductName the prductName to set
+	 * @return the productId
 	 */
-	public void setPrductName(String prductName) {
-		this.prductName = prductName;
+	public long getProductId() {
+		return productId;
 	}
 
 	/**
@@ -92,17 +65,45 @@ public class Product {
 	}
 
 	/**
-	 * @param stock the stock to set
-	 */
-	public void setStock(long stock) {
-		this.stock = stock;
-	}
-
-	/**
 	 * @return the unitPrice
 	 */
 	public double getUnitPrice() {
 		return unitPrice;
+	}
+
+	/**
+	 * @param cartProduct the cartProduct to set
+	 */
+	public void setCartProduct(Set<Cart_Product> cartProduct) {
+		this.cartProduct = cartProduct;
+	}
+
+	/**
+	 * @param orderProduct the orderProduct to set
+	 */
+	public void setOrderProduct(Set<Order_Product> orderProduct) {
+		this.orderProduct = orderProduct;
+	}
+
+	/**
+	 * @param prductName the prductName to set
+	 */
+	public void setPrductName(String prductName) {
+		this.prductName = prductName;
+	}
+
+	/**
+	 * @param productId the productId to set
+	 */
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
+
+	/**
+	 * @param stock the stock to set
+	 */
+	public void setStock(long stock) {
+		this.stock = stock;
 	}
 
 	/**

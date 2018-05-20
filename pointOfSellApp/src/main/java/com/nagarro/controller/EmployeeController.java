@@ -29,7 +29,7 @@ public class EmployeeController {
 		return employees;
 	}
 	
-	@RequestMapping(value="/addemp")
+	@RequestMapping(value="/addemp", method=RequestMethod.POST)
 	public void addEmployee() {
 		System.out.println("In controller..");
 		Employee emp = new Employee();

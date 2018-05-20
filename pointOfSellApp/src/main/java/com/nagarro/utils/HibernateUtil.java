@@ -36,7 +36,7 @@ public class HibernateUtil {
         return sessionFactory.getCurrentSession().createQuery(" FROM "+entityClass.getName()).list();        
     }
   
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({"rawtypes", "deprecation"})
     public <T> List fetchAll(String query) {        
         return sessionFactory.getCurrentSession().createSQLQuery(query).list();        
     }
