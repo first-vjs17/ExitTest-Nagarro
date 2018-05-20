@@ -23,23 +23,23 @@ public class Customer {
 	@OneToMany(mappedBy="customer", fetch=FetchType.EAGER)
 	private Set<OrderDetails> orderDetails = new HashSet<>();
 	
-	@OneToOne(mappedBy="customer", fetch=FetchType.EAGER)
-	private Cart cart = new Cart();
+//	@OneToOne(mappedBy="customer", fetch=FetchType.LAZY)
+//	private Cart cart = new Cart();
 
 
 	/**
 	 * @return the cart
 	 */
-	public Cart getCart() {
-		return cart;
-	}
-
-	/**
-	 * @param cart the cart to set
-	 */
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
+//	public Cart getCart() {
+//		return cart;
+//	}
+//
+//	/**
+//	 * @param cart the cart to set
+//	 */
+//	public void setCart(Cart cart) {
+//		this.cart = cart;
+//	}
 
 	/**
 	 * @return the orderDetails

@@ -34,19 +34,16 @@ public class Cart {
 	@OneToOne( cascade = CascadeType.ALL )
 	@JoinColumn( name="cust_id", nullable = false )
 	private Customer customer;
+	
+	public Cart() {
+		
+	}
 
 	/**
 	 * @return the cartId
 	 */
 	public long getCartId() {
 		return cartId;
-	}
-
-	/**
-	 * @param cartId the cartId to set
-	 */
-	public void setCartId(long cartId) {
-		this.cartId = cartId;
 	}
 
 	/**
@@ -57,17 +54,24 @@ public class Cart {
 	}
 
 	/**
-	 * @param cartProduct the cartProduct to set
-	 */
-	public void setCartProduct(Set<Cart_Product> cartProduct) {
-		this.cartProduct = cartProduct;
-	}
-
-	/**
 	 * @return the customer
 	 */
 	public Customer getCustomer() {
 		return customer;
+	}
+
+	/**
+	 * @param cartId the cartId to set
+	 */
+	public void setCartId(long cartId) {
+		this.cartId = cartId;
+	}
+
+	/**
+	 * @param cartProduct the cartProduct to set
+	 */
+	public void setCartProduct(Set<Cart_Product> cartProduct) {
+		this.cartProduct = cartProduct;
 	}
 
 	/**

@@ -20,7 +20,7 @@ public class EmployeeController {
 	EmployeeService employeeService;
 	
 	/*---get all employees---*/
-	@RequestMapping(value="/employees", method = RequestMethod.GET)
+	@GetMapping(value="/employee")
 	public List<Employee> demo() {
 		List<Employee> employees = employeeService.getAllEmployees();
 		for (Employee employee : employees) {
