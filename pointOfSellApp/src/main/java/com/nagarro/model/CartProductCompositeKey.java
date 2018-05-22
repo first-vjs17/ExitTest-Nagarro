@@ -6,7 +6,6 @@ package com.nagarro.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-
 import javax.persistence.Embeddable;
 
 /**
@@ -37,7 +36,5 @@ public class CartProductCompositeKey implements Serializable{
 		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
-	
-	
 	
 }

@@ -29,6 +29,7 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
+	/*--- add a customer ---*/
 	@PostMapping( value = "/customer")
 	public ResponseEntity<?> addCustomer(@RequestBody Customer customer) {
 		long id = customerService.save(customer);

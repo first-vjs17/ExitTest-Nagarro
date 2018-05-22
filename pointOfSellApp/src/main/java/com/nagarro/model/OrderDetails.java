@@ -5,7 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,115 +18,50 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.nagarro.enums.ModeOfPayments;
+import com.nagarro.enums.PaymentStatus;
+
 @Entity
 public class OrderDetails {
 	
-	@Id
-    @GeneratedValue
-	private long orderId;
-	private String status; //enum
-	
-	@CreationTimestamp
-	private LocalDateTime orderDate;
-	
 	private double amount;
-	
-	private String modeOfPayment;  //enum
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="emp_id", nullable=false)
-	private Employee employee;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cust_id", nullable=false)
 	private Customer customer;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="emp_id", nullable=false)
+	private Employee employee;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(length=8)
+	private ModeOfPayments modeOfPayments;
+	
+	@CreationTimestamp
+	private LocalDateTime orderDate;
+	
+	@Id
+    @GeneratedValue
+	private long orderId;
+	
 	@OneToMany(mappedBy="orderDetails",fetch=FetchType.EAGER)
 	private Set<Order_Product> orderProduct = new HashSet<>();
 	
+	@Enumerated(EnumType.STRING)
+	@Column(length=8)
+	private PaymentStatus status;
 	
-	/**
-	 * @return the orderId
-	 */
-	public long getOrderId() {
-		return orderId;
+	public OrderDetails() {
+		
 	}
-
-	/**
-	 * @param orderId the orderId to set
-	 */
-	public void setOrderId(long orderId) {
-		this.orderId = orderId;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	/**
-	 * @return the orderDate
-	 */
-	public LocalDateTime getOrderDate() {
-		return orderDate;
-	}
-
-	/**
-	 * @param orderDate the orderDate to set
-	 */
-	public void setOrderDate(LocalDateTime orderDate) {
-		this.orderDate = orderDate;
-	}
-
+	
+	
 	/**
 	 * @return the amount
 	 */
 	public double getAmount() {
 		return amount;
-	}
-
-	/**
-	 * @param amount the amount to set
-	 */
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-
-	/**
-	 * @return the modeOfPayment
-	 */
-	public String getModeOfPayment() {
-		return modeOfPayment;
-	}
-
-	/**
-	 * @param modeOfPayment the modeOfPayment to set
-	 */
-	public void setModeOfPayment(String modeOfPayment) {
-		this.modeOfPayment = modeOfPayment;
-	}
-
-	/**
-	 * @return the employee
-	 */
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	/**
-	 * @param employee the employee to set
-	 */
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
 	}
 
 	/**
@@ -134,10 +72,31 @@ public class OrderDetails {
 	}
 
 	/**
-	 * @param customer the customer to set
+	 * @return the employee
 	 */
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	/**
+	 * @return the modeOfPayments
+	 */
+	public ModeOfPayments getModeOfPayments() {
+		return modeOfPayments;
+	}
+
+	/**
+	 * @return the orderDate
+	 */
+	public LocalDateTime getOrderDate() {
+		return orderDate;
+	}
+
+	/**
+	 * @return the orderId
+	 */
+	public long getOrderId() {
+		return orderId;
 	}
 
 	/**
@@ -148,10 +107,66 @@ public class OrderDetails {
 	}
 
 	/**
+	 * @return the status
+	 */
+	public PaymentStatus getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param amount the amount to set
+	 */
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	/**
+	 * @param customer the customer to set
+	 */
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	/**
+	 * @param employee the employee to set
+	 */
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	/**
+	 * @param modeOfPayments the modeOfPayments to set
+	 */
+	public void setModeOfPayments(ModeOfPayments modeOfPayments) {
+		this.modeOfPayments = modeOfPayments;
+	}
+
+	/**
+	 * @param orderDate the orderDate to set
+	 */
+	public void setOrderDate(LocalDateTime orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	/**
+	 * @param orderId the orderId to set
+	 */
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
+
+	/**
 	 * @param orderProduct the orderProduct to set
 	 */
 	public void setOrderProduct(Set<Order_Product> orderProduct) {
 		this.orderProduct = orderProduct;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(PaymentStatus status) {
+		this.status = status;
 	}
 	
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nagarro.model.Cart;
+import com.nagarro.model.Cart_Product;
 import com.nagarro.repository.CartRepository;
 
 /**
@@ -25,5 +26,10 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public long save(Cart cart) {
 		return cartRepository.save(cart);
+	}
+
+	@Override
+	public void saveProductInCart(Cart_Product cartProduct) {
+		cartRepository.saveProductInCart(cartProduct);
 	}
 }

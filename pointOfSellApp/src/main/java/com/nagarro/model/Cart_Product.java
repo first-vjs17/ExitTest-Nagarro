@@ -15,19 +15,32 @@ import javax.persistence.MapsId;
  */
 @Entity
 public class Cart_Product {
-	
+
 	@EmbeddedId
 	private CartProductCompositeKey id;
-	
+
 	private int quantity;
-	
+
 	@MapsId("cartKey")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Cart cart;
-	
+
 	@MapsId("productKey")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Product product;
+	
+	public Cart_Product( ) {
+		
+	}
+
+	public Cart_Product(CartProductCompositeKey id, int quantity) {
+		this.id = id;
+		this.quantity = quantity;
+	}
+
+	public Cart_Product(int quantity) {
+		this.quantity = quantity;
+	}
 
 	/**
 	 * @return the id
@@ -37,7 +50,8 @@ public class Cart_Product {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(CartProductCompositeKey id) {
 		this.id = id;
@@ -51,7 +65,8 @@ public class Cart_Product {
 	}
 
 	/**
-	 * @param quantity the quantity to set
+	 * @param quantity
+	 *            the quantity to set
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;

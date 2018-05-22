@@ -32,9 +32,6 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 	@Override
 	public long save(Customer customer) {
 		long customerId = (long) hibernateUtil.create(customer);
-		Cart cart = new Cart();
-		cart.setCustomer(customer);
-		long cartId = cartService.save(cart);
 		return customerId;
 	}
 

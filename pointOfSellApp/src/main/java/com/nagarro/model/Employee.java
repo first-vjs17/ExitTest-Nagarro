@@ -1,13 +1,8 @@
 package com.nagarro.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Employee {
@@ -21,43 +16,47 @@ public class Employee {
 	private String employeeMobileNo;
 	private String password;
 	
-	@OneToMany(mappedBy = "employee", fetch=FetchType.EAGER)
-	private Set<EmployeeCashDrawer> employeeCashDrawerDetails = new HashSet<>();
+	public Employee() {
+		
+	}
 	
-	@OneToMany(mappedBy = "employee", fetch=FetchType.EAGER)
-	private Set<OrderDetails> orderDetails = new HashSet<>();
+	public Employee(long id) {
+		this.employeeId = id;
+	}
+	
+//	@OneToMany(mappedBy = "employee", fetch=FetchType.LAZY)
+//	private Set<EmployeeCashDrawer> employeeCashDrawerDetails = new HashSet<>();
+	
+//	@OneToMany(mappedBy = "employee", fetch=FetchType.EAGER)
+//	private Set<OrderDetails> orderDetails = new HashSet<>();
 	/**
 	 * @return the employeeCashDrawerDetails
 	 */
-	public Set<EmployeeCashDrawer> getEmployeeCashDrawerDetails() {
-		return employeeCashDrawerDetails;
-	}
-
-	/**
-	 * @param employeeCashDrawerDetails the employeeCashDrawerDetails to set
-	 */
-	public void setEmployeeCashDrawerDetails(
-			Set<EmployeeCashDrawer> employeeCashDrawerDetails) {
-		this.employeeCashDrawerDetails = employeeCashDrawerDetails;
-	}
+//	public Set<EmployeeCashDrawer> getEmployeeCashDrawerDetails() {
+//		return employeeCashDrawerDetails;
+//	}
+//
+//	/**
+//	 * @param employeeCashDrawerDetails the employeeCashDrawerDetails to set
+//	 */
+//	public void setEmployeeCashDrawerDetails(
+//			Set<EmployeeCashDrawer> employeeCashDrawerDetails) {
+//		this.employeeCashDrawerDetails = employeeCashDrawerDetails;
+//	}
 
 	/**
 	 * @return the orderDetails
 	 */
-	public Set<OrderDetails> getOrderDetails() {
-		return orderDetails;
-	}
-
-	/**
-	 * @param orderDetails the orderDetails to set
-	 */
-	public void setOrderDetails(Set<OrderDetails> orderDetails) {
-		this.orderDetails = orderDetails;
-	}
-
-	public Employee() {
-		
-	}
+//	public Set<OrderDetails> getOrderDetails() {
+//		return orderDetails;
+//	}
+//
+//	/**
+//	 * @param orderDetails the orderDetails to set
+//	 */
+//	public void setOrderDetails(Set<OrderDetails> orderDetails) {
+//		this.orderDetails = orderDetails;
+//	}
 
 
 	/**
@@ -129,7 +128,5 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 	
 }

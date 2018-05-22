@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,19 +27,23 @@ public class EmployeeCashDrawer {
 	@Id
 	@GeneratedValue
 	private long employeeCashId;
-	@CreationTimestamp
+
 	private LocalDateTime startTime;
-	@UpdateTimestamp
 	private LocalDateTime endTime;
 	private double startCash;
 	private double endCash;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+	private boolean active;
+
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="emp_id", nullable=false)
 	private Employee employee;
 	
 	public EmployeeCashDrawer() {
 		
+	}
+	
+	public EmployeeCashDrawer(boolean active) {
+		this.active = active;
 	}
 
 	/**
@@ -46,6 +51,20 @@ public class EmployeeCashDrawer {
 	 */
 	public long getEmployeeCashId() {
 		return employeeCashId;
+	}
+	
+	/**
+	 * @return the active
+	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	/**

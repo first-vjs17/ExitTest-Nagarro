@@ -13,6 +13,7 @@ import com.nagarro.model.Product;
  */
 public interface ProductRepository {
 
-	public long createProduct(Product product);
-	public List<Product> getAllProducts();
+	long save( Product product );
+	List<Product> getAllProducts();
+	Product getProductById(long productId);
 }

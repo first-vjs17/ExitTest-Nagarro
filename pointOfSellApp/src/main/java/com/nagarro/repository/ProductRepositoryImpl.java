@@ -16,20 +16,25 @@ import com.nagarro.utils.HibernateUtil;
  * @author vijaysharma01
  *
  */
-@Repository("ProductRepository")
+@Repository("productRepository")
 public class ProductRepositoryImpl implements ProductRepository{
 	
 	@Autowired
 	private HibernateUtil hibernateUtil;
 
 	@Override
-	public long createProduct(Product product) {
+	public List<Product> getAllProducts() {
+		return hibernateUtil.fetchAll(Product.class);
+	}
+
+	@Override
+	public long save(Product product) {
 		return (Long) hibernateUtil.create(product);
 	}
 
 	@Override
-	public List<Product> getAllProducts() {
-		return hibernateUtil.fetchAll(Product.class);
+	public Product getProductById(long productId) {
+		return hibernateUtil.fetchById(productId, Product.class);
 	}
 
 }
