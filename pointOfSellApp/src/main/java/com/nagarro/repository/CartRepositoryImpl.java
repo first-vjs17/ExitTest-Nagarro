@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.nagarro.model.Cart;
-import com.nagarro.model.Cart_Product;
+import com.nagarro.model.CartProduct;
 import com.nagarro.utils.HibernateUtil;
 
 /**
@@ -35,7 +35,7 @@ public class CartRepositoryImpl implements CartRepository{
 	}
 
 	@Override
-	public void saveProductInCart(Cart_Product cartProduct) {
+	public void saveProductInCart(CartProduct cartProduct) {
 		getCurrentSession().save(cartProduct);
 //		getCurrentSession().createNativeQuery("select sum(amount)");
 	}

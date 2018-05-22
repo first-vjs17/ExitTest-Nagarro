@@ -8,15 +8,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="product")
 public class Product {
 
-	@OneToMany(mappedBy="product",fetch=FetchType.EAGER)
-	private Set<Cart_Product> cartProduct = new HashSet<>();
+	@OneToMany(mappedBy="pk.product",fetch=FetchType.EAGER)
+	private Set<CartProduct> cartProduct = new HashSet<>();
 	@OneToMany(mappedBy="product",fetch=FetchType.EAGER)
 	private Set<Order_Product> orderProduct = new HashSet<>();
-	private String prductName;
+	private String productName;
 	@Id
 	@GeneratedValue
 	private long productId;
@@ -28,11 +30,15 @@ public class Product {
 	public Product() {
 		
 	}
+	
+	public Product(long productId) {
+		this.productId = productId;
+	}
 
 	/**
 	 * @return the cartProduct
 	 */
-	public Set<Cart_Product> getCartProduct() {
+	public Set<CartProduct> getCartProduct() {
 		return cartProduct;
 	}
 
@@ -46,8 +52,8 @@ public class Product {
 	/**
 	 * @return the prductName
 	 */
-	public String getPrductName() {
-		return prductName;
+	public String getProductName() {
+		return productName;
 	}
 
 	/**
@@ -74,7 +80,7 @@ public class Product {
 	/**
 	 * @param cartProduct the cartProduct to set
 	 */
-	public void setCartProduct(Set<Cart_Product> cartProduct) {
+	public void setCartProduct(Set<CartProduct> cartProduct) {
 		this.cartProduct = cartProduct;
 	}
 
@@ -88,8 +94,8 @@ public class Product {
 	/**
 	 * @param prductName the prductName to set
 	 */
-	public void setPrductName(String prductName) {
-		this.prductName = prductName;
+	public void setProductName(String prductName) {
+		this.productName = prductName;
 	}
 
 	/**

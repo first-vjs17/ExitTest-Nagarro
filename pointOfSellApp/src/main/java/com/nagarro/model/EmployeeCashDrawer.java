@@ -3,6 +3,7 @@
  */
 package com.nagarro.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,7 @@ import org.hibernate.annotations.UpdateTimestamp;
  */
 
 @Entity
-public class EmployeeCashDrawer {
+public class EmployeeCashDrawer implements Serializable{
 	
 	@Id
 	@GeneratedValue
@@ -34,8 +35,8 @@ public class EmployeeCashDrawer {
 	private double endCash;
 	private boolean active;
 
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="emp_id", nullable=false)
+	@ManyToOne //(fetch=FetchType.EAGER)
+//	@JoinColumn(name="employeeId", nullable=false)
 	private Employee employee;
 	
 	public EmployeeCashDrawer() {

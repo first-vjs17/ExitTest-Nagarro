@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * @author vijaysharma01
@@ -21,14 +22,15 @@ import javax.persistence.OneToOne;
  */
 
 @Entity
+@Table(name= "cart")
 public class Cart {
 	
 	@Id
 	@GeneratedValue
 	private long cartId;
 	
-	@OneToMany(mappedBy="cart",fetch=FetchType.EAGER)
-	private Set<Cart_Product> cartProduct = new HashSet<>();
+	@OneToMany(mappedBy="pk.cart")
+	private Set<CartProduct> cartProduct = new HashSet<>();
 	
 	@OneToOne( cascade = CascadeType.ALL )
 	@JoinColumn( name="cust_id", nullable = false )
@@ -52,7 +54,7 @@ public class Cart {
 	/**
 	 * @return the cartProduct
 	 */
-	public Set<Cart_Product> getCartProduct() {
+	public Set<CartProduct> getCartProduct() {
 		return cartProduct;
 	}
 
@@ -73,7 +75,7 @@ public class Cart {
 	/**
 	 * @param cartProduct the cartProduct to set
 	 */
-	public void setCartProduct(Set<Cart_Product> cartProduct) {
+	public void setCartProduct(Set<CartProduct> cartProduct) {
 		this.cartProduct = cartProduct;
 	}
 

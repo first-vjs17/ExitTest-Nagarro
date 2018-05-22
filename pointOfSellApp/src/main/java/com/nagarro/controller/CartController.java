@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nagarro.model.Cart;
 import com.nagarro.model.CartProductCompositeKey;
-import com.nagarro.model.Cart_Product;
+import com.nagarro.model.Product;
+import com.nagarro.model.CartProduct;
 import com.nagarro.service.CartService;
 
 /**
@@ -38,9 +39,12 @@ public class CartController {
 	public ResponseEntity<?> addProductInCart(@PathVariable String cartId,
 			@PathVariable String productId, @PathVariable String quantity ){
 
+		Cart cart = new Cart(Long.parseLong(cartId));
+		Product product = new Product(Long.parseLong(productId));
+		
 		CartProductCompositeKey cartProductCompositeKey = 
-				new CartProductCompositeKey(Long.parseLong(cartId),Long.parseLong(productId));
-		Cart_Product cartProduct = new Cart_Product(cartProductCompositeKey,
+				new CartProductCompositeKey(cart,product);
+		CartProduct cartProduct = new CartProduct(cartProductCompositeKey,
 				Integer.parseInt(quantity));
 		
 		cartService.saveProductInCart(cartProduct);

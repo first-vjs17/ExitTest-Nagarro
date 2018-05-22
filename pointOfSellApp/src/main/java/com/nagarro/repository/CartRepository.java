@@ -4,7 +4,7 @@
 package com.nagarro.repository;
 
 import com.nagarro.model.Cart;
-import com.nagarro.model.Cart_Product;
+import com.nagarro.model.CartProduct;
 
 /**
  * @author vijaysharma01
@@ -13,5 +13,5 @@ import com.nagarro.model.Cart_Product;
 public interface CartRepository {
 
 	long save( Cart cart );
-	void saveProductInCart( Cart_Product cartProduct );
+	void saveProductInCart( CartProduct cartProduct );
 }
