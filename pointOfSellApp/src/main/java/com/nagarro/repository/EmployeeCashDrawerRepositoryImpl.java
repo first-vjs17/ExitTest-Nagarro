@@ -21,9 +21,7 @@ import com.nagarro.utils.HibernateUtil;
  *
  */
 @Repository("employeeCashDrawerRepository")
-public class EmployeeCashDrawerRepositoryImpl
-		implements
-			EmployeeCashDrawerRepository {
+public class EmployeeCashDrawerRepositoryImpl implements EmployeeCashDrawerRepository {
 
 	@Autowired
 	private HibernateUtil hibernateUtil;

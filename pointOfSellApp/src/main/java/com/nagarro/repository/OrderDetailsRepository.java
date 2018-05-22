@@ -3,6 +3,7 @@
  */
 package com.nagarro.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.nagarro.model.OrderDetails;
@@ -16,4 +17,6 @@ public interface OrderDetailsRepository {
 	long save( OrderDetails orderDetails );
 	List<OrderDetails> getAllOrderDetails();
 	OrderDetails getOrderDetailById(long OrderDetailId);
+	double getAmountBetweenDate(long employeeId,
+			LocalDateTime startTime, LocalDateTime endTime);
 }

@@ -5,6 +5,7 @@ package com.nagarro.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,5 +46,12 @@ public class CartController {
 		cartService.saveProductInCart(cartProduct);
 		
 		return ResponseEntity.ok().body("New CartProduct has been saved with ID:");
+	}
+	
+	//Incomplete
+	@DeleteMapping( value = "/cartProduct/{cartId}" )
+	public ResponseEntity<?> deleteProductsInCart(@PathVariable String cartId) {
+		
+		return ResponseEntity.ok().body("Products has been deleted.");
 	}
 }
