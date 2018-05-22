@@ -3,14 +3,15 @@
  */
 package com.nagarro.model;
 
-import java.io.Serializable;
-
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 /**
@@ -20,38 +21,28 @@ import javax.persistence.Table;
 @Entity
 @Table(name="cart_product")
 @AssociationOverrides({
-	@AssociationOverride(name="pk.cart", joinColumns = {
-			@JoinColumn(name = "cart_id")
+	@AssociationOverride(name="pk.orderDetails", joinColumns = {
+			@JoinColumn(name = "order_id")
 	}),
 	@AssociationOverride(name="pk.product", joinColumns = {
 			@JoinColumn(name = "product_id")
 	})
 })
-public class CartProduct implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6647467153298091996L;
+public class OrderProduct {
 
 	@EmbeddedId
-	private CartProductCompositeKey pk =
-			new CartProductCompositeKey();
+	private OrderProductCompositeKey pk;
 
-	@Column(name = "p_qty")
+	@Column( name="p_qty")
 	private int quantity;
 	
-	public CartProduct( ) {
-		
-	}
-
-	public CartProduct(CartProductCompositeKey pk, int quantity) {
+	public OrderProduct(OrderProductCompositeKey pk, int quantity ) {
 		this.pk = pk;
 		this.quantity = quantity;
 	}
-
-	public CartProduct(int quantity) {
-		this.quantity = quantity;
+	
+	public OrderProduct() {
+		
 	}
 
 	/**
@@ -62,11 +53,10 @@ public class CartProduct implements Serializable{
 	}
 
 	/**
-	 * @param quantity
-	 *            the quantity to set
+	 * @param quantity the quantity to set
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
+	
 }

@@ -29,7 +29,18 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
+	public void updateProductInCart(CartProduct cartProduct) {
+		cartRepository.updateProductInCart(cartProduct);
+	}
+
+	@Override
 	public void saveProductInCart(CartProduct cartProduct) {
 		cartRepository.saveProductInCart(cartProduct);
 	}
+
+	@Override
+	public void deleteProductsInCart(long cartId) {
+		cartRepository.deleteProductsInCart(cartId);
+	}
+
 }

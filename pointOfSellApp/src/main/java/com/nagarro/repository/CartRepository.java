@@ -14,4 +14,6 @@ public interface CartRepository {
 
 	long save( Cart cart );
 	void saveProductInCart( CartProduct cartProduct );
+	void updateProductInCart( CartProduct cartProduct );
+	void deleteProductsInCart( long cartId );
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.nagarro.enums.ModeOfPayments;
+import com.nagarro.enums.PaymentStatus;
 import com.nagarro.model.OrderDetails;
 import com.nagarro.utils.HibernateUtil;
 
@@ -63,6 +64,7 @@ public class OrderDetailsRepositoryImpl implements OrderDetailsRepository{
 		.setParameter("startTime", startTime)
 		.setParameter("mop" , ModeOfPayments.CASH);
 		
+		query.executeUpdate();
 		List<Integer> list=query.list();  
 		System.out.println(list.get(0));
 		
@@ -71,6 +73,27 @@ public class OrderDetailsRepositoryImpl implements OrderDetailsRepository{
 	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
+	}
+
+	@Override
+	public List<OrderDetails> getAllCompleteOrderDetails() {
+
+		Session session = getCurrentSession();
+		String hql = "from OrderDetails order by orderDate where status = :status";
+		Query query = session.createQuery(hql)
+				.setParameter("status", PaymentStatus.PAID);
+		query.executeUpdate();
+		return query.list();
+	}
+
+	@Override
+	public List<OrderDetails> getAllOnHoldOrderDetails() {
+		Session session = getCurrentSession();
+		String hql = "from OrderDetails order by orderDate where status = :status";
+		Query query = session.createQuery(hql)
+				.setParameter("status", PaymentStatus.ON_HOLD);
+		query.executeUpdate();
+		return query.list();
 	}
 	
 }

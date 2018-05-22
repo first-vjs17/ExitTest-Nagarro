@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,11 +35,41 @@ public class CartController {
 	    return ResponseEntity.ok().body("New Cart has been saved with ID:" + id);
 	}
 	
-	//Not Working API
 	@PostMapping( value = "/cartProduct/{cartId}/{productId}/{quantity}")
 	public ResponseEntity<?> addProductInCart(@PathVariable String cartId,
 			@PathVariable String productId, @PathVariable String quantity ){
 
+		CartProduct cartProduct = getCartProduct(cartId, productId, quantity);
+		
+		cartService.saveProductInCart(cartProduct);
+		
+		return ResponseEntity.ok().body("New CartProduct has been saved with ID:");
+	}
+	
+	//Not necessary
+	@DeleteMapping( value = "/cartProduct/{cartId}" )
+	public ResponseEntity<?> deleteProductsInCart(@PathVariable String cartId) {
+		cartService.deleteProductsInCart(Long.parseLong(cartId));
+		return ResponseEntity.ok().body("Products has been deleted.");
+	}
+	
+	/* This API will update the quantity of product in DB */
+	@PutMapping( value = "/cartProduct/{cartId}/{productId}/{quantity}")
+	public ResponseEntity<?> updateProductInCart(@PathVariable String cartId,
+			@PathVariable String productId, @PathVariable String quantity ){
+		
+		CartProduct cartProduct = getCartProduct(cartId, productId, quantity);
+		
+		cartService.updateProductInCart(cartProduct);
+		
+		return ResponseEntity.ok().body("Products has been updated.");
+	}
+	
+	/* This */
+//	@DeleteMapping( value = "/cart/{cartId}" )
+//	public ResponseEntity<?> deleteCart( @PathVariable )
+	
+	private CartProduct getCartProduct(String cartId, String productId, String quantity) {
 		Cart cart = new Cart(Long.parseLong(cartId));
 		Product product = new Product(Long.parseLong(productId));
 		
@@ -47,15 +78,6 @@ public class CartController {
 		CartProduct cartProduct = new CartProduct(cartProductCompositeKey,
 				Integer.parseInt(quantity));
 		
-		cartService.saveProductInCart(cartProduct);
-		
-		return ResponseEntity.ok().body("New CartProduct has been saved with ID:");
-	}
-	
-	//Incomplete
-	@DeleteMapping( value = "/cartProduct/{cartId}" )
-	public ResponseEntity<?> deleteProductsInCart(@PathVariable String cartId) {
-		
-		return ResponseEntity.ok().body("Products has been deleted.");
+		return cartProduct;
 	}
 }

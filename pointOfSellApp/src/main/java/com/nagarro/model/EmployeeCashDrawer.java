@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,12 +28,22 @@ public class EmployeeCashDrawer implements Serializable{
 	
 	@Id
 	@GeneratedValue
+	@Column(name="emp_cash_id")
 	private long employeeCashId;
 
+	@Column( name = "s_time")
 	private LocalDateTime startTime;
+	
+	@Column( name = "e_time")
 	private LocalDateTime endTime;
+	
+	@Column( name = "s_cash")
 	private double startCash;
+	
+	@Column( name = "e_cash")
 	private double endCash;
+	
+	@Column( name = "active")
 	private boolean active;
 
 	@ManyToOne //(fetch=FetchType.EAGER)

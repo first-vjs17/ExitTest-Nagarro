@@ -3,6 +3,7 @@ package com.nagarro.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,15 +17,18 @@ public class Product {
 
 	@OneToMany(mappedBy="pk.product",fetch=FetchType.EAGER)
 	private Set<CartProduct> cartProduct = new HashSet<>();
-	@OneToMany(mappedBy="product",fetch=FetchType.EAGER)
-	private Set<Order_Product> orderProduct = new HashSet<>();
+	@OneToMany(mappedBy="pk.product",fetch=FetchType.EAGER)
+	private Set<OrderProduct> orderProduct = new HashSet<>();
+	
+	@Column(name="product_name")
 	private String productName;
 	@Id
 	@GeneratedValue
+	@Column(name="prduct_id")
 	private long productId;
-	
+	@Column(name="stock")
 	private long stock;
-	
+	@Column(name="u_price")
 	private double unitPrice;
 	
 	public Product() {
@@ -45,7 +49,7 @@ public class Product {
 	/**
 	 * @return the orderProduct
 	 */
-	public Set<Order_Product> getOrderProduct() {
+	public Set<OrderProduct> getOrderProduct() {
 		return orderProduct;
 	}
 
@@ -87,7 +91,7 @@ public class Product {
 	/**
 	 * @param orderProduct the orderProduct to set
 	 */
-	public void setOrderProduct(Set<Order_Product> orderProduct) {
+	public void setOrderProduct(Set<OrderProduct> orderProduct) {
 		this.orderProduct = orderProduct;
 	}
 

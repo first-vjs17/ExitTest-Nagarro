@@ -37,6 +37,16 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
 	public OrderDetails getOrderDetailById(long OrderDetailId) {
 		return orderDetailsRepository.getOrderDetailById(OrderDetailId);
 	}
+
+	@Override
+	public List<OrderDetails> getAllCompleteOrderDetails() {
+		return orderDetailsRepository.getAllCompleteOrderDetails();
+	}
+
+	@Override
+	public List<OrderDetails> getAllOnHoldOrderDetails() {
+		return orderDetailsRepository.getAllOnHoldOrderDetails();
+	}
 	
 	
 }

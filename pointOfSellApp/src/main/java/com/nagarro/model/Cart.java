@@ -7,11 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,13 +26,13 @@ public class Cart {
 	
 	@Id
 	@GeneratedValue
+	@Column( name = "cartId" )
 	private long cartId;
 	
-	@OneToMany(mappedBy="pk.cart")
+	@OneToMany(mappedBy="pk.cart" )
 	private Set<CartProduct> cartProduct = new HashSet<>();
 	
 	@OneToOne( cascade = CascadeType.ALL )
-	@JoinColumn( name="cust_id", nullable = false )
 	private Customer customer;
 	
 	public Cart() {

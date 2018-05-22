@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,11 +18,19 @@ public class Employee implements Serializable {
 
 	@Id
     @GeneratedValue
+    @Column(name = "emp_id")
 	private long employeeId;
 	
+	@Column(name = "emp_name")
 	private String employeeName;
+	
+	@Column(name = "emp_mail")
 	private String employeeEmail;
+	
+	@Column(name = "emp_mobile")
 	private String employeeMobileNo;
+	
+	@Column(name = "password")
 	private String password;
 	
 	public Employee() {

@@ -14,4 +14,6 @@ import com.nagarro.model.CartProduct;
 public interface CartService {
 	long save( Cart cart );
 	void saveProductInCart( CartProduct cartProduct );
+	void updateProductInCart( CartProduct cartProduct );
+	void deleteProductsInCart( long cartId );
 }

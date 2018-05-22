@@ -19,4 +19,6 @@ public interface OrderDetailsRepository {
 	OrderDetails getOrderDetailById(long OrderDetailId);
 	double getAmountBetweenDate(long employeeId,
 			LocalDateTime startTime, LocalDateTime endTime);
+	List<OrderDetails> getAllCompleteOrderDetails();
+	List<OrderDetails> getAllOnHoldOrderDetails();
 }

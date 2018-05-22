@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -22,34 +23,36 @@ import com.nagarro.enums.ModeOfPayments;
 import com.nagarro.enums.PaymentStatus;
 
 @Entity
+@Table(name="orderDetails")
 public class OrderDetails {
 	
+	@Column(name="amount")
 	private double amount;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="cust_id", nullable=false)
+	@ManyToOne
 	private Customer customer;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="emp_id", nullable=false)
+	@ManyToOne
 	private Employee employee;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(length=8)
+	@Column(length=8,name="mode_of_payments")
 	private ModeOfPayments modeOfPayments;
 	
 	@CreationTimestamp
+	@Column(name="order_date")
 	private LocalDateTime orderDate;
 	
 	@Id
     @GeneratedValue
+    @Column(name="order_id")
 	private long orderId;
 	
-	@OneToMany(mappedBy="orderDetails",fetch=FetchType.EAGER)
-	private Set<Order_Product> orderProduct = new HashSet<>();
+	@OneToMany(mappedBy="pk.orderDetails" )
+	private Set<OrderProduct> orderProduct = new HashSet<>();
 	
 	@Enumerated(EnumType.STRING)
-	@Column(length=8)
+	@Column(length=8,name="status")
 	private PaymentStatus status;
 	
 	public OrderDetails() {
@@ -102,7 +105,7 @@ public class OrderDetails {
 	/**
 	 * @return the orderProduct
 	 */
-	public Set<Order_Product> getOrderProduct() {
+	public Set<OrderProduct> getOrderProduct() {
 		return orderProduct;
 	}
 
@@ -158,7 +161,7 @@ public class OrderDetails {
 	/**
 	 * @param orderProduct the orderProduct to set
 	 */
-	public void setOrderProduct(Set<Order_Product> orderProduct) {
+	public void setOrderProduct(Set<OrderProduct> orderProduct) {
 		this.orderProduct = orderProduct;
 	}
 

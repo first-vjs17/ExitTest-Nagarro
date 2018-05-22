@@ -16,4 +16,7 @@ public interface OrderDetailsService {
 	long save( OrderDetails orderDetails );
 	List<OrderDetails> getAllOrderDetails();
 	OrderDetails getOrderDetailById(long OrderDetailId);
+	List<OrderDetails> getAllCompleteOrderDetails();
+	List<OrderDetails> getAllOnHoldOrderDetails();
+	
 }

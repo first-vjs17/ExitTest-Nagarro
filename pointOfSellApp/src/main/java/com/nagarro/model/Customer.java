@@ -3,6 +3,7 @@ package com.nagarro.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,9 +16,16 @@ public class Customer {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "cust_id")
 	private long customerId;
+	
+	@Column(name = "cust_name")
 	private String customerName;
+	
+	@Column(name = "cust_mail")
 	private String customerMail;
+	
+	@Column(name = "cust_mobile")
 	private String customerMobile;
 	
 	@OneToMany(mappedBy="customer", fetch=FetchType.EAGER)
