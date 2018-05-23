@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author vijaysharma01
  *
@@ -29,7 +31,7 @@ public class Cart {
 	@Column( name = "cartId" )
 	private long cartId;
 	
-	@OneToMany(mappedBy="pk.cart" )
+	@OneToMany(mappedBy="cp.cart" )
 	private Set<CartProduct> cartProduct = new HashSet<>();
 	
 	@OneToOne( cascade = CascadeType.ALL )

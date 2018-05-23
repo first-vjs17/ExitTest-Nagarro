@@ -20,10 +20,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="cart_product")
 @AssociationOverrides({
-	@AssociationOverride(name="pk.cart", joinColumns = {
+	@AssociationOverride(name="cp.cart", joinColumns = {
 			@JoinColumn(name = "cart_id")
 	}),
-	@AssociationOverride(name="pk.product", joinColumns = {
+	@AssociationOverride(name="cp.product", joinColumns = {
 			@JoinColumn(name = "product_id")
 	})
 })
@@ -35,8 +35,21 @@ public class CartProduct implements Serializable{
 	private static final long serialVersionUID = 6647467153298091996L;
 
 	@EmbeddedId
-	private CartProductCompositeKey pk =
-			new CartProductCompositeKey();
+	private CartProductCompositeKey cp;
+
+	/**
+	 * @return the cp
+	 */
+	public CartProductCompositeKey getCp() {
+		return cp;
+	}
+
+	/**
+	 * @param cp the cp to set
+	 */
+	public void setCp(CartProductCompositeKey cp) {
+		this.cp = cp;
+	}
 
 	@Column(name = "p_qty")
 	private int quantity;
@@ -45,8 +58,8 @@ public class CartProduct implements Serializable{
 		
 	}
 
-	public CartProduct(CartProductCompositeKey pk, int quantity) {
-		this.pk = pk;
+	public CartProduct(CartProductCompositeKey cp, int quantity) {
+		this.cp = cp;
 		this.quantity = quantity;
 	}
 

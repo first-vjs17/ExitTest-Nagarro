@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Customer {
 	
@@ -29,6 +31,7 @@ public class Customer {
 	private String customerMobile;
 	
 	@OneToMany(mappedBy="customer", fetch=FetchType.EAGER)
+	@JsonIgnore
 	private Set<OrderDetails> orderDetails = new HashSet<>();
 	
 //	@OneToOne(mappedBy="customer", fetch=FetchType.LAZY)

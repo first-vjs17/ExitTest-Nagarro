@@ -46,8 +46,7 @@ public class EmployeeCashDrawer implements Serializable{
 	@Column( name = "active")
 	private boolean active;
 
-	@ManyToOne //(fetch=FetchType.EAGER)
-//	@JoinColumn(name="employeeId", nullable=false)
+	@ManyToOne
 	private Employee employee;
 	
 	public EmployeeCashDrawer() {

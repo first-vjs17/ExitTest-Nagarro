@@ -4,21 +4,19 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nagarro.enums.ModeOfPayments;
 import com.nagarro.enums.PaymentStatus;
 
@@ -49,6 +47,7 @@ public class OrderDetails {
 	private long orderId;
 	
 	@OneToMany(mappedBy="pk.orderDetails" )
+	@JsonIgnore
 	private Set<OrderProduct> orderProduct = new HashSet<>();
 	
 	@Enumerated(EnumType.STRING)

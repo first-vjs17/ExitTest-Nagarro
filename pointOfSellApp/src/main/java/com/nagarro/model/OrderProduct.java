@@ -19,7 +19,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="cart_product")
+@Table(name="order_product")
 @AssociationOverrides({
 	@AssociationOverride(name="pk.orderDetails", joinColumns = {
 			@JoinColumn(name = "order_id")

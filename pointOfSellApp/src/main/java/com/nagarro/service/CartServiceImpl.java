@@ -3,6 +3,8 @@
  */
 package com.nagarro.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +43,11 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public void deleteProductsInCart(long cartId) {
 		cartRepository.deleteProductsInCart(cartId);
+	}
+
+	@Override
+	public List<CartProduct> getAllCartProducts( long cartId ) {
+		return cartRepository.getAllCartProducts( cartId );
 	}
 
 }

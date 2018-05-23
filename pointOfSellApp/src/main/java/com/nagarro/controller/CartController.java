@@ -3,9 +3,12 @@
  */
 package com.nagarro.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,7 +49,9 @@ public class CartController {
 		return ResponseEntity.ok().body("New CartProduct has been saved with ID:");
 	}
 	
-	//Not necessary
+	/*
+	 * This API will delete the cart entries of customer.
+	 */
 	@DeleteMapping( value = "/cartProduct/{cartId}" )
 	public ResponseEntity<?> deleteProductsInCart(@PathVariable String cartId) {
 		cartService.deleteProductsInCart(Long.parseLong(cartId));
@@ -65,9 +70,11 @@ public class CartController {
 		return ResponseEntity.ok().body("Products has been updated.");
 	}
 	
-	/* This */
-//	@DeleteMapping( value = "/cart/{cartId}" )
-//	public ResponseEntity<?> deleteCart( @PathVariable )
+	@GetMapping( value = "/cartProduct/{cartId}" )
+	public ResponseEntity<List<CartProduct>> getAllCartProducts(@PathVariable long cartId) {
+		List<CartProduct> list = cartService.getAllCartProducts(cartId);
+		return ResponseEntity.ok().body(list);
+	}
 	
 	private CartProduct getCartProduct(String cartId, String productId, String quantity) {
 		Cart cart = new Cart(Long.parseLong(cartId));

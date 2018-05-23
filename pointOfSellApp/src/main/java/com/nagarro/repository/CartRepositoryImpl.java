@@ -3,8 +3,6 @@
  */
 package com.nagarro.repository;
 
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.nagarro.model.Cart;
 import com.nagarro.model.CartProduct;
+import com.nagarro.model.Product;
 import com.nagarro.utils.HibernateUtil;
 
 /**
@@ -47,17 +46,13 @@ public class CartRepositoryImpl implements CartRepository{
 		Session session = getCurrentSession();
 		session.save(cartProduct);
 	}
-	
-	private Session getCurrentSession() {
-		return sessionFactory.getCurrentSession();
-	}
 
 	@Override
 	public void deleteProductsInCart(long cartId) {
 		
 		Cart cart = new Cart(cartId);
 		Session session = getCurrentSession();
-		String deleteHql = "delete from CartProduct where pk.cart = :cart ";
+		String deleteHql = "delete from CartProduct where cp.cart = :cart ";
 		
 		@SuppressWarnings("rawtypes")
 		Query query = session.createQuery(deleteHql)
@@ -65,6 +60,24 @@ public class CartRepositoryImpl implements CartRepository{
 
 		query.executeUpdate();
 		
+	}
+
+	@Override
+	public List<CartProduct> getAllCartProducts( long cartId ) {
+		
+		Cart cart = new Cart(cartId);
+		Session session = getCurrentSession();
+		String hql = "select cp.product from CartProduct where cp.cart = :cart";
+		
+		Query query = session.createQuery(hql)
+				.setParameter("cart", cart);
+		
+		List<Product> list = query.list();
+		return query.list();
+	}
+	
+	private Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
 	}
 	
 }

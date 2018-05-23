@@ -11,12 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="product")
 public class Product {
 
-	@OneToMany(mappedBy="pk.product",fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy="cp.product",fetch=FetchType.EAGER)
 	private Set<CartProduct> cartProduct = new HashSet<>();
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="pk.product",fetch=FetchType.EAGER)
 	private Set<OrderProduct> orderProduct = new HashSet<>();
 	
