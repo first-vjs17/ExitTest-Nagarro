@@ -5,19 +5,12 @@ package com.nagarro.model;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-/**
- * @author vijaysharma01
- *
- */
 @Entity
 @Table(name="order_product")
 @AssociationOverrides({
@@ -43,6 +36,20 @@ public class OrderProduct {
 	
 	public OrderProduct() {
 		
+	}
+
+	/**
+	 * @return the pk
+	 */
+	public OrderProductCompositeKey getPk() {
+		return pk;
+	}
+
+	/**
+	 * @param pk the pk to set
+	 */
+	public void setPk(OrderProductCompositeKey pk) {
+		this.pk = pk;
 	}
 
 	/**

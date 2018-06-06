@@ -26,12 +26,21 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public List<Employee> getAllEmployees() {
 		return employeeRepository.getAllEmployees();
 	}
+
+	@Override
+	public Employee employeeVarification(Employee employee, double startCash) {
+		return employeeRepository.employeeVarification(employee, startCash);
+	}
+
+	@Override
+	public double logoutEmployee(Employee employee) {
+		return employeeRepository.logoutEmployee(employee);
+	}
+
+	@Override
+	public List<Employee> downloadDataByEmployeeId(long empId) {
+		return employeeRepository.downloadDataByEmployeeId(empId);
+	}
 	
-//	@Autowired
-//	EmployeeRepository employeeRepository;
-//
-//	@Override
-//	public long createEmployee(Employee employee) {
-//        return employeeRepository.createEmployee(employee);
-//    }
+	
 }

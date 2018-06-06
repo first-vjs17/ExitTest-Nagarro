@@ -3,44 +3,32 @@
  */
 package com.nagarro.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-/**
- * @author vijaysharma01
- *
- */
 
 @Entity
-@Table(name= "cart")
+@Table(name = "cart")
 public class Cart {
-	
+
 	@Id
 	@GeneratedValue
-	@Column( name = "cartId" )
+	@Column(name = "cartId")
 	private long cartId;
-	
-	@OneToMany(mappedBy="cp.cart" )
-	private Set<CartProduct> cartProduct = new HashSet<>();
-	
-	@OneToOne( cascade = CascadeType.ALL )
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Customer customer;
-	
+
 	public Cart() {
-		
+
 	}
-	
+
 	public Cart(long cartId) {
 		this.cartId = cartId;
 	}
@@ -52,12 +40,6 @@ public class Cart {
 		return cartId;
 	}
 
-	/**
-	 * @return the cartProduct
-	 */
-	public Set<CartProduct> getCartProduct() {
-		return cartProduct;
-	}
 
 	/**
 	 * @return the customer
@@ -67,21 +49,16 @@ public class Cart {
 	}
 
 	/**
-	 * @param cartId the cartId to set
+	 * @param cartId
+	 *            the cartId to set
 	 */
 	public void setCartId(long cartId) {
 		this.cartId = cartId;
 	}
 
 	/**
-	 * @param cartProduct the cartProduct to set
-	 */
-	public void setCartProduct(Set<CartProduct> cartProduct) {
-		this.cartProduct = cartProduct;
-	}
-
-	/**
-	 * @param customer the customer to set
+	 * @param customer
+	 *            the customer to set
 	 */
 	public void setCustomer(Customer customer) {
 		this.customer = customer;

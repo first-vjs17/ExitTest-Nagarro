@@ -8,68 +8,66 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.nagarro.model.EmployeeCashDrawer;
 import com.nagarro.utils.HibernateUtil;
 
-/**
- * @author vijaysharma01
- *
- */
 @Repository("employeeCashDrawerRepository")
 public class EmployeeCashDrawerRepositoryImpl implements EmployeeCashDrawerRepository {
 
 	@Autowired
 	private HibernateUtil hibernateUtil;
-	
-	@Autowired
-	private SessionFactory sessionFactory;
 
+	/*--- Save employeeCashDrawer object ---*/
 	@Override
 	public long save(EmployeeCashDrawer employeeCashDrawer) {
 		return (long) hibernateUtil.create(employeeCashDrawer);
 	}
 
+	/*--- Get all EmployeeCashDrawer by employee id ---*/
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<EmployeeCashDrawer> getAllEmployeeCashDrawer() {
-		return hibernateUtil.fetchAll(EmployeeCashDrawer.class);
+	public List<EmployeeCashDrawer> getAllEmployeeCashDrawer( long employeeId ) {
+		Session session = hibernateUtil.getCurrentSession();
+		String hql = "From EmployeeCashDrawer where employee.employeeId = :employeeId ";
+		return session.createQuery(hql)
+				   .setParameter("employeeId", employeeId)
+				   .list();
 	}
 
-	/* Method will set the endCash, after emloyee gets logged out
+	/* 
+	 * Method will set the endCash, after emloyee gets logged out
 	 * and set active "false" which means this raw will never be used
 	 */
 	@Override
-	public void update( String employeeId, String endCash ) {
+	public void update( long employeeId, double endCash ) {
 		
-		Session session = getCurrentSession();
-
+		//Get current session.
+		Session session = hibernateUtil.getCurrentSession();
+		//Update the endcash for an employee by its id.
 		String hql = "UPDATE EmployeeCashDrawer set endCash = :cash "
 				+ "WHERE employee.employeeId = :id and active = :active";
-		Query query = session.createQuery(hql);
-		query.setParameter("cash", Double.parseDouble(endCash));
-		query.setParameter("id", Long.parseLong(employeeId));
-		query.setParameter("active", true);
-		int result = query.executeUpdate();
-		System.out.println("Rows affected: " + result);
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		session.createQuery(hql)
+			   .setParameter("cash", endCash)
+			   .setParameter("id", employeeId)
+			   .setParameter("active", true)
+			   .executeUpdate();
+		
+		DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();  
 		
+		//When employee logouts set its active column as false and update its endtime too.
 		hql = "UPDATE EmployeeCashDrawer set active = :notActive, endTime = :endtime "
 				+ "WHERE employee.employeeId = :id and active = :active";
-		query = session.createQuery(hql);
-		query.setParameter("notActive", false);
-		query.setParameter("endtime", now);
-		query.setParameter("id", Long.parseLong(employeeId));
-		query.setParameter("active", true);
-		result = query.executeUpdate();
+		session.createQuery(hql)
+			   .setParameter("notActive", false)
+			   .setParameter("endtime", now)
+			   .setParameter("id", employeeId)
+			   .setParameter("active", true)
+			   .executeUpdate();
 
 	}
 	
-	private Session getCurrentSession() {
-		return sessionFactory.getCurrentSession();
-	}
 }

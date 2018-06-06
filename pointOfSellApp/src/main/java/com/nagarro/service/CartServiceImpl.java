@@ -13,11 +13,6 @@ import com.nagarro.model.Cart;
 import com.nagarro.model.CartProduct;
 import com.nagarro.repository.CartRepository;
 
-/**
- * @author vijaysharma01
- *
- */
-
 @Transactional
 @Service("cartService")
 public class CartServiceImpl implements CartService{
@@ -36,8 +31,8 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public void saveProductInCart(CartProduct cartProduct) {
-		cartRepository.saveProductInCart(cartProduct);
+	public CartProduct saveProductInCart(CartProduct cartProduct) {
+		return cartRepository.saveProductInCart(cartProduct);
 	}
 
 	@Override
@@ -48,6 +43,26 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public List<CartProduct> getAllCartProducts( long cartId ) {
 		return cartRepository.getAllCartProducts( cartId );
+	}
+
+	@Override
+	public List<Cart> getCartByCustId(long custId) {
+		return cartRepository.getCartByCustId(custId);
+	}
+
+	@Override
+	public void deleteOneProduct(CartProduct cartProduct) {
+		cartRepository.deleteOneProduct(cartProduct);
+	}
+
+	@Override
+	public CartProduct getCartProduct(long cartId, long productId) {
+		return cartRepository.getCartProduct(cartId, productId);
+	}
+
+	@Override
+	public void reloadCart(long orderId) {
+		cartRepository.reloadCart(orderId);
 	}
 
 }

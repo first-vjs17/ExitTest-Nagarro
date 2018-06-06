@@ -1,30 +1,15 @@
 package com.nagarro.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="product")
 public class Product {
 
-
-	@OneToMany(mappedBy="cp.product",fetch=FetchType.EAGER)
-	private Set<CartProduct> cartProduct = new HashSet<>();
-	
-	@JsonIgnore
-	@OneToMany(mappedBy="pk.product",fetch=FetchType.EAGER)
-	private Set<OrderProduct> orderProduct = new HashSet<>();
-	
 	@Column(name="product_name")
 	private String productName;
 	@Id
@@ -32,7 +17,7 @@ public class Product {
 	@Column(name="prduct_id")
 	private long productId;
 	@Column(name="stock")
-	private long stock;
+	private int stock;
 	@Column(name="u_price")
 	private double unitPrice;
 	
@@ -42,20 +27,6 @@ public class Product {
 	
 	public Product(long productId) {
 		this.productId = productId;
-	}
-
-	/**
-	 * @return the cartProduct
-	 */
-	public Set<CartProduct> getCartProduct() {
-		return cartProduct;
-	}
-
-	/**
-	 * @return the orderProduct
-	 */
-	public Set<OrderProduct> getOrderProduct() {
-		return orderProduct;
 	}
 
 	/**
@@ -75,7 +46,7 @@ public class Product {
 	/**
 	 * @return the stock
 	 */
-	public long getStock() {
+	public int getStock() {
 		return stock;
 	}
 
@@ -84,20 +55,6 @@ public class Product {
 	 */
 	public double getUnitPrice() {
 		return unitPrice;
-	}
-
-	/**
-	 * @param cartProduct the cartProduct to set
-	 */
-	public void setCartProduct(Set<CartProduct> cartProduct) {
-		this.cartProduct = cartProduct;
-	}
-
-	/**
-	 * @param orderProduct the orderProduct to set
-	 */
-	public void setOrderProduct(Set<OrderProduct> orderProduct) {
-		this.orderProduct = orderProduct;
 	}
 
 	/**
@@ -117,7 +74,7 @@ public class Product {
 	/**
 	 * @param stock the stock to set
 	 */
-	public void setStock(long stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 

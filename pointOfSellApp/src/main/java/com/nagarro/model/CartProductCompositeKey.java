@@ -4,15 +4,10 @@
 package com.nagarro.model;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
-/**
- * @author vijaysharma01
- *
- */
 @Embeddable
 public class CartProductCompositeKey implements Serializable{
 

@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,24 +32,14 @@ public class Customer {
 	@OneToMany(mappedBy="customer", fetch=FetchType.EAGER)
 	@JsonIgnore
 	private Set<OrderDetails> orderDetails = new HashSet<>();
+
+	public Customer() {
+		
+	}
 	
-//	@OneToOne(mappedBy="customer", fetch=FetchType.LAZY)
-//	private Cart cart = new Cart();
-
-
-	/**
-	 * @return the cart
-	 */
-//	public Cart getCart() {
-//		return cart;
-//	}
-//
-//	/**
-//	 * @param cart the cart to set
-//	 */
-//	public void setCart(Cart cart) {
-//		this.cart = cart;
-//	}
+	public Customer(long custId) {
+		this.customerId = custId;
+	}
 
 	/**
 	 * @return the orderDetails
@@ -64,10 +53,6 @@ public class Customer {
 	 */
 	public void setOrderDetails(Set<OrderDetails> orderDetails) {
 		this.orderDetails = orderDetails;
-	}
-
-	public Customer() {
-		
 	}
 	
 	/**

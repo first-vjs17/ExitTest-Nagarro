@@ -13,10 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-/**
- * @author vijaysharma01
- *
- */
 @Entity
 @Table(name="cart_product")
 @AssociationOverrides({
@@ -56,6 +52,10 @@ public class CartProduct implements Serializable{
 	
 	public CartProduct( ) {
 		
+	}
+	
+	public CartProduct(CartProductCompositeKey cp) {
+		this.cp = cp;
 	}
 
 	public CartProduct(CartProductCompositeKey cp, int quantity) {

@@ -1,20 +1,12 @@
 package com.nagarro.model;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Employee implements Serializable {
+public class Employee {
 
 	@Id
     @GeneratedValue
@@ -40,42 +32,6 @@ public class Employee implements Serializable {
 	public Employee(long id) {
 		this.employeeId = id;
 	}
-	
-	@OneToMany(mappedBy = "employee", fetch=FetchType.LAZY)
-	@JsonIgnore
-	private Set<EmployeeCashDrawer> employeeCashDrawerDetails = new HashSet<>();
-	
-//	@OneToMany(mappedBy = "employee", fetch=FetchType.EAGER)
-//	private Set<OrderDetails> orderDetails = new HashSet<>();
-	/**
-	 * @return the employeeCashDrawerDetails
-	 */
-	public Set<EmployeeCashDrawer> getEmployeeCashDrawerDetails() {
-		return employeeCashDrawerDetails;
-	}
-
-	/**
-	 * @param employeeCashDrawerDetails the employeeCashDrawerDetails to set
-	 */
-	public void setEmployeeCashDrawerDetails(
-			Set<EmployeeCashDrawer> employeeCashDrawerDetails) {
-		this.employeeCashDrawerDetails = employeeCashDrawerDetails;
-	}
-
-	/**
-	 * @return the orderDetails
-	 */
-//	public Set<OrderDetails> getOrderDetails() {
-//		return orderDetails;
-//	}
-//
-//	/**
-//	 * @param orderDetails the orderDetails to set
-//	 */
-//	public void setOrderDetails(Set<OrderDetails> orderDetails) {
-//		this.orderDetails = orderDetails;
-//	}
-
 
 	/**
 	 * @return the employeeId

@@ -12,10 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nagarro.model.EmployeeCashDrawer;
 import com.nagarro.repository.EmployeeCashDrawerRepository;
 
-/**
- * @author vijaysharma01
- *
- */
 @Transactional
 @Service("employeeCashDrawerService")
 public class EmployeeCashDrawerServiceImpl implements EmployeeCashDrawerService{
@@ -29,12 +25,12 @@ public class EmployeeCashDrawerServiceImpl implements EmployeeCashDrawerService{
 	}
 
 	@Override
-	public List<EmployeeCashDrawer> getAllEmployeeCashDrawer() {
-		return employeeCashDrawerRepository.getAllEmployeeCashDrawer();
+	public List<EmployeeCashDrawer> getAllEmployeeCashDrawer( long employeeId ) {
+		return employeeCashDrawerRepository.getAllEmployeeCashDrawer( employeeId );
 	}
 
 	@Override
-	public void update(String employeeId, String endCash) {
+	public void update(long employeeId, double endCash ) {
 		employeeCashDrawerRepository.update(employeeId, endCash);
 	}
 

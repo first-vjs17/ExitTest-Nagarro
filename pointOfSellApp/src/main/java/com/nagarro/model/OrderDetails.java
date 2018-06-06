@@ -1,8 +1,6 @@
 package com.nagarro.model;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,12 +9,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nagarro.enums.ModeOfPayments;
 import com.nagarro.enums.PaymentStatus;
 
@@ -45,17 +41,17 @@ public class OrderDetails {
     @GeneratedValue
     @Column(name="order_id")
 	private long orderId;
-	
-	@OneToMany(mappedBy="pk.orderDetails" )
-	@JsonIgnore
-	private Set<OrderProduct> orderProduct = new HashSet<>();
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(length=8,name="status")
 	private PaymentStatus status;
 	
 	public OrderDetails() {
 		
+	}
+	
+	public OrderDetails(long orderId) {
+		this.orderId = orderId;
 	}
 	
 	
@@ -99,13 +95,6 @@ public class OrderDetails {
 	 */
 	public long getOrderId() {
 		return orderId;
-	}
-
-	/**
-	 * @return the orderProduct
-	 */
-	public Set<OrderProduct> getOrderProduct() {
-		return orderProduct;
 	}
 
 	/**
@@ -155,13 +144,6 @@ public class OrderDetails {
 	 */
 	public void setOrderId(long orderId) {
 		this.orderId = orderId;
-	}
-
-	/**
-	 * @param orderProduct the orderProduct to set
-	 */
-	public void setOrderProduct(Set<OrderProduct> orderProduct) {
-		this.orderProduct = orderProduct;
 	}
 
 	/**

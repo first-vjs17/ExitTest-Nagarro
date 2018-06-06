@@ -16,36 +16,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nagarro.model.Product;
 import com.nagarro.service.ProductService;
+import com.nagarro.uri.ProductRestURIConstants;
 
-/**
- * @author vijaysharma01
- *
- */
 @CrossOrigin
 @RestController
 public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+
+	
+	/*------------------------------ GET METHODS ---------------------------------*/
+	
+	
+	/*--- Get all products ---*/
+	@GetMapping( value = ProductRestURIConstants.GET_PRODUCT )
+	public ResponseEntity<List<Product>> list() {
+		List<Product> products = productService.getAllProducts();
+		return ResponseEntity.ok().body(products);
+	}
+
+	/*---Get a customer by search inputs ---*/
+	@GetMapping( value = ProductRestURIConstants.GET_PRODUCT_BY_SEARCH_PARAMETER )
+	public ResponseEntity<List<Product>> getProductBySearchParameter(@PathVariable("searchInput") String searchInput) {
+		List<Product> proList = productService.getProductBySearchParameter(searchInput);
+		return ResponseEntity.ok().body(proList);
+	}
+	
+	/*------------------------------ POST METHODS --------------------------------*/
+	
 	
 	/*--- Add a product ---*/
-	@PostMapping( value = "/product")
+	@PostMapping( value = ProductRestURIConstants.POST_PRODUCT )
 	public ResponseEntity<?> addProduct(@RequestBody Product product) {
 		long id = productService.save(product);
 	    return ResponseEntity.ok().body("New Product has been saved with ID:" + id);
 	}
 	
-	/*--- Get all products ---*/
-	@GetMapping( value = "/product" )
-	public ResponseEntity<List<Product>> list() {
-		List<Product> products = productService.getAllProducts();
-		return ResponseEntity.ok().body(products);
-	}
 	
-	/*---Get a product by id---*/
-	@GetMapping("/product/{id}")
-	public ResponseEntity<Product> getByID(@PathVariable("id") long id) {
-		Product product = productService.getProductById(id);
-		return ResponseEntity.ok().body(product);
-	}
 }

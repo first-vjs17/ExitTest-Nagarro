@@ -7,14 +7,12 @@ import java.util.List;
 
 import com.nagarro.model.EmployeeCashDrawer;
 
-/**
- * @author vijaysharma01
- *
- */
 public interface EmployeeCashDrawerService {
 
 	long save( EmployeeCashDrawer employeeCashDrawer );
-	List<EmployeeCashDrawer> getAllEmployeeCashDrawer();
-	void update( String employeeId, String endCash );
+	
+	List<EmployeeCashDrawer> getAllEmployeeCashDrawer( long employeeId );
+	
+	void update( long employeeId, double endCash );
 
 }

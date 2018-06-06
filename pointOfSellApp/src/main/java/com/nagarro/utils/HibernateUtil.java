@@ -1,8 +1,13 @@
+/*
+ * Some Comman functions used in Repository classes.
+ */
+
 package com.nagarro.utils;
 
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,9 +46,12 @@ public class HibernateUtil {
         return sessionFactory.getCurrentSession().createSQLQuery(query).list();        
     }
     
-    @SuppressWarnings("unchecked")
     public <T> T fetchById(Serializable id, Class<T> entityClass) {
         return (T)sessionFactory.getCurrentSession().get(entityClass, id);
     }   
     
+    /*--- This method will get the current session ---*/
+	public Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
+	}
 }

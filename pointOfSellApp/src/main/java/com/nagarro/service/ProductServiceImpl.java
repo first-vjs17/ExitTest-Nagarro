@@ -12,10 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nagarro.model.Product;
 import com.nagarro.repository.ProductRepository;
 
-/**
- * @author vijaysharma01
- *
- */
 @Transactional
 @Service("productService")
 public class ProductServiceImpl implements ProductService{
@@ -36,6 +32,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public Product getProductById(long productId) {
 		return productRepository.getProductById(productId);
+	}
+
+	@Override
+	public List<Product> getProductBySearchParameter(String searchInput) {
+		return productRepository.getProductBySearchParameter(searchInput);
 	}
 
 }

@@ -13,11 +13,6 @@ import com.nagarro.model.Cart;
 import com.nagarro.model.Customer;
 import com.nagarro.repository.CustomerRepository;
 
-/**
- * @author vijaysharma01
- *
- */
-
 @Transactional
 @Service("customerService")
 public class CustomerServiceImpl implements CustomerService{
@@ -46,16 +41,9 @@ public class CustomerServiceImpl implements CustomerService{
 	public Customer getCustomerById(long customerId) {
 		return customerRepository.getCustomerById(customerId);
 	}
-
+	
 	@Override
-	public Customer getCustomerByName(String customerName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Customer getCustomerByMobileNo(String customerMobileNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Customer> getCustomerBySearchParameter(String searchInput) {
+		return customerRepository.getCustomerBySearchParameter(searchInput);
 	}
 }
